@@ -29,6 +29,7 @@ input:focus{border-color:#3B82F6;}
 .row .input-group{flex:1;}
 .btn-primary{width:100%;padding:13px;background:linear-gradient(135deg,#3B82F6,#2563EB);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px;box-shadow:0 4px 15px rgba(59,130,246,0.4);-webkit-tap-highlight-color:transparent;}
 .btn-secondary{width:100%;padding:10px;background:#0f3460;border:1px solid #1a4080;border-radius:12px;color:#aaa;font-size:13px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.badge{display:inline-block;background:#1D9E75;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
 .stat{background:#16213e;border-radius:12px;padding:10px;text-align:center;border:1px solid #0f3460;}
 .stat-l{font-size:10px;color:#888;margin-bottom:3px;}
@@ -48,37 +49,42 @@ canvas{width:100%!important;height:auto!important;border-radius:12px;display:blo
 .tip{font-size:11px;color:#666;margin-top:4px;}
 .info-box{background:#0f3460;border-radius:10px;padding:8px 12px;margin-bottom:10px;font-size:12px;color:#888;line-height:1.6;}
 .info-box strong{color:#aaa;}
+.otimo{font-size:11px;color:#1D9E75;margin-top:3px;}
 @supports(padding-bottom:env(safe-area-inset-bottom)){body{padding-bottom:calc(2rem + env(safe-area-inset-bottom));}}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-icon">🎰</div>
   <div>
-    <div class="header-title">Roleta Adam</div>
-    <div class="header-sub">Cluster principal • Espelho • Alta precisão</div>
+    <div class="header-title">Roleta Adam <span class="badge">v3</span></div>
+    <div class="header-sub">Janela deslizante • Cluster • Espelho</div>
   </div>
 </div>
 
 <div class="container">
-
   <div class="card">
-    <div class="card-title">Configuração</div>
+    <div class="card-title">Histórico</div>
     <div class="input-group">
-      <label>Histórico (últimos números)</label>
-      <input id="hist" type="text" value="32, 32, 26, 7, 18, 20, 5" placeholder="ex: 32, 26, 7, 18, 5">
+      <label>Números (do mais antigo ao mais recente)</label>
+      <input id="hist" type="text" placeholder="ex: 22, 1, 14, 22, 17, 36, 19...">
     </div>
+    <div class="card-title" style="margin-top:4px;">Configuração</div>
     <div class="row">
       <div class="input-group">
-        <label>Vizinhos</label>
-        <input id="nbrs" type="number" value="2" min="1" max="4">
-        <div class="tip">de cada lado</div>
+        <label>Janela (últimos K)</label>
+        <input id="janela" type="number" value="20" min="5" max="50">
+        <div class="otimo">✓ ótimo: 20</div>
       </div>
       <div class="input-group">
-        <label>Raio mínimo cluster</label>
+        <label>Vizinhos</label>
+        <input id="nbrs" type="number" value="3" min="1" max="5">
+        <div class="otimo">✓ ótimo: 3</div>
+      </div>
+      <div class="input-group">
+        <label>Raio mínimo</label>
         <input id="minc" type="number" value="2" min="1" max="5">
-        <div class="tip">para ativar</div>
+        <div class="tip">cluster mín.</div>
       </div>
     </div>
     <button class="btn-primary" onclick="render()">🔍 Analisar</button>
@@ -92,14 +98,14 @@ canvas{width:100%!important;height:auto!important;border-radius:12px;display:blo
     <div class="li"><div class="ld" style="background:#EF9F27;"></div>Vizinhos cluster</div>
     <div class="li"><div class="ld" style="background:#3B82F6;"></div>Espelho</div>
     <div class="li"><div class="ld" style="background:#7C3AED;"></div>Vizinhos espelho</div>
-    <div class="li"><div class="ld" style="background:#444;"></div>Ignorado</div>
+    <div class="li"><div class="ld" style="background:#2a2a3e;"></div>Ignorado</div>
     <div class="li"><div class="ld" style="background:#1D9E75;"></div>Zero</div>
   </div>
 
   <canvas id="c"></canvas>
-
-  <div class="aposta" id="aposta"></div>
-
+  <div class="aposta" id="aposta">
+    <div class="aposta-title">📍 Insira o histórico e clique em Analisar</div>
+  </div>
 </div>
 
 <script src="app.js"></script>
