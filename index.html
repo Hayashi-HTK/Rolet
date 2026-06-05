@@ -19,8 +19,12 @@ body{
   color:#eee;
   min-height:100vh;
   padding-bottom:2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .header{
+  display: none;
   background:linear-gradient(135deg,#16213e,#0f3460);
   padding:1rem 1.2rem 0.8rem;
   display:flex;align-items:center;gap:10px;
@@ -31,7 +35,7 @@ body{
 .header-title{font-size:18px;font-weight:700;color:#fff;}
 .header-sub{font-size:11px;color:#aaa;margin-top:1px;}
 
-.container{padding:1rem;}
+.container{padding:1rem;max-width: 550px;}
 
 .card{
   background:#16213e;
